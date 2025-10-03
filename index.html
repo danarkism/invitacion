@@ -113,11 +113,11 @@
         }
         .bubble {
             position: fixed;
-            background: rgba(0, 123, 255, 0.4);
+            background: rgba(0, 123, 255, 0.3);
             border-radius: 50%;
             pointer-events: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
-            animation: floatUp 2s ease-out forwards;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            animation: floatUp 4s ease-out forwards;
             transform-origin: center center;
             z-index: 9999; /* Ensure on-click bubbles are on top */
         }
@@ -127,7 +127,7 @@
                 opacity: 1;
             }
             to {
-                transform: translate(-50%, -250px) scale(0);
+                transform: translate(-50%, -300px) scale(0);
                 opacity: 0;
             }
         }
@@ -490,7 +490,7 @@
                 <div class="question-card">
                      <fieldset>
                         <legend class="font-bold text-lg mb-4">10. ¿Cuál es tu rango de edad?</legend>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <label>
                                 <input type="radio" name="edad" value="25-34" class="sr-only peer">
                                 <div class="choice-card">
@@ -509,6 +509,13 @@
                                 <input type="radio" name="edad" value="45-55" class="sr-only peer">
                                 <div class="choice-card">
                                     <span class="font-semibold">45 - 55 años</span>
+                                    <span class="choice-icon block mt-1">✔</span>
+                                </div>
+                            </label>
+                             <label>
+                                <input type="radio" name="edad" value="Más de 55" class="sr-only peer">
+                                <div class="choice-card">
+                                    <span class="font-semibold">Más de 55 años</span>
                                     <span class="choice-icon block mt-1">✔</span>
                                 </div>
                             </label>
@@ -640,27 +647,28 @@
 
             function createBubble(e) {
                 const clickableArea = e.currentTarget;
-                const rect = clickableArea.getBoundingClientRect();
 
-                for (let i = 0; i < 5; i++) {
+                // Create a few bubbles for a richer effect
+                for (let i = 0; i < 3; i++) {
                     const bubble = document.createElement('div');
                     bubble.className = 'bubble';
                     document.body.appendChild(bubble);
 
-                    const size = Math.random() * 40 + 10;
-                    const x = e.clientX + (Math.random() - 0.5) * rect.width;
-                    const y = e.clientY + (Math.random() - 0.5) * rect.height * 0.5;
+                    const size = Math.random() * 25 + 5; // Bubbles between 5px and 30px
+                    const x = e.clientX + (Math.random() - 0.5) * 40;
+                    const y = e.clientY + (Math.random() - 0.5) * 40;
 
                     bubble.style.width = `${size}px`;
                     bubble.style.height = `${size}px`;
                     bubble.style.left = `${x}px`;
                     bubble.style.top = `${y}px`;
 
-                    bubble.style.animationDuration = `${Math.random() * 1 + 1.5}s`;
+                    // Randomize animation duration for a more natural feel
+                    bubble.style.animationDuration = `${Math.random() * 1.5 + 2.5}s`;
 
                     setTimeout(() => {
                         bubble.remove();
-                    }, 2500);
+                    }, 4500); // Remove bubble after animation
                 }
             }
             
@@ -799,3 +807,4 @@
     </script>
 </body>
 </html>
+
